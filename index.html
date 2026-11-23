@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evaluación Módulo 2: Coaching, Facilitación y Enseñanza como Agile Coach | ACPC V072026</title>
+
+  <!-- Google Fonts (Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            canvas: '#F4F7FB',
+            certi: {
+              navy: '#0A1A3C',
+              navyLight: '#152B59',
+              navyDark: '#061128',
+              blue: '#0077B6',
+              blueDark: '#005F92',
+              cyan: '#00A8E8',
+              soft: '#EBF4FA',
+              border: '#CDE3F2',
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #F4F7FB;
+      color: #1E293B;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-slide {
+      animation: fadeSlideIn 0.25s ease-out forwards;
+    }
+
+    @keyframes pulseUrgent {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.45);
+      }
+      50% {
+        box-shadow: 0 0 0 6px rgba(217, 119, 6, 0);
+      }
+    }
+
+    .timer-urgent {
+      animation: pulseUrgent 1.4s infinite;
+    }
+
+    /* Estilos limpios para impresión / Guardar constancia en PDF */
+    @media print {
+      @page {
+        size: auto;
+        margin: 16mm 15mm 16mm 15mm;
+      }
+
+      html,
+      body {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        font-size: 11pt !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      * {
+        box-sizing: border-box !important;
+      }
+
+      #results-view {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+
+      #results-view > div {
+        max-width: 100% !important;
+        margin: 0 !important;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .print-only {
+        display: block !important;
+      }
+
+      .print-break-avoid {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+
+      .print-card {
+        box-shadow: none !important;
+        border: 1px solid #CBD5E1 !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+      }
+
+      .print-results-header {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        border-radius: 12px 12px 0 0 !important;
+        padding: 16px 20px !important;
+      }
+
+      .print-metrics-grid {
+        display: grid !important;
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+
+      /* Al imprimir se muestran todas las preguntas revisadas con espaciado compacto */
+      .review-item {
+        display: block !important;
+        padding: 14px 16px !important;
+        margin-bottom: 12px !important;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen flex flex-col bg-canvas text-slate-800 selection:bg-certi-blue selection:text-white">
+
+  <!-- ===================================================================== -->
+  <!-- VISTA 1: PANTALLA DE INICIO                                           -->
+  <!-- ===================================================================== -->
+  <main id="welcome-view" class="flex-1 flex items-center justify-center p-4 sm:p-6 md:p-8">
+    <div class="w-full max-w-3xl bg-white rounded-2xl border border-slate-200/90 shadow-sm overflow-hidden animate-fade-slide">
+
+      <!-- Cabecera institucional Certiprof -->
+      <div class="bg-certi-navy text-white px-6 py-7 sm:px-9 sm:py-9 relative overflow-hidden">
+        <div class="absolute right-0 top-0 h-full w-40 bg-gradient-to-l from-certi-cyan/15 to-transparent pointer-events-none"></div>
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4 relative z-10">
+          <span class="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase bg-white/10 border border-white/15 px-3 py-1 rounded-full text-slate-100">
+            <span class="w-2 h-2 rounded-full bg-certi-cyan"></span>
+            Certiprof® ACPC · Versión 072026
+          </span>
+          <span class="text-xs font-medium text-slate-300">Evaluación Oficial de Entrenamiento</span>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight relative z-10">
+          Evaluación Módulo 2: Coaching, Facilitación y Enseñanza como Agile Coach
+        </h1>
+        <p class="mt-3 text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl relative z-10">
+          Valida tus conocimientos sobre el rol y las competencias del Agile Coach con preguntas extraídas directamente del banco oficial de la certificación <strong class="text-white font-semibold">Agile Coach Professional Certificate (ACPC)</strong>.
+        </p>
+      </div>
+
+      <!-- Cuerpo de condiciones y registro -->
+      <div class="p-6 sm:p-9 space-y-7">
+
+        <!-- Tarjetas de condiciones -->
+        <div>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">
+            Condiciones de la Evaluación
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <!-- 10 Preguntas -->
+            <div class="rounded-xl border border-slate-200 bg-canvas p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-certi-soft text-certi-blue flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-certi-navy">10 Preguntas</p>
+                <p class="text-xs text-slate-500 mt-0.5">Opción múltiple en orden fijo oficial.</p>
+              </div>
+            </div>
+
+            <!-- 15 Minutos obligatorios -->
+            <div class="rounded-xl border border-slate-200 bg-canvas p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-certi-navy">15 Minutos</p>
+                <p class="text-xs text-slate-500 mt-0.5">Temporizador obligatorio. Envío automático al llegar a 00:00.</p>
+              </div>
+            </div>
+
+            <!-- 80% de aprobación -->
+            <div class="rounded-xl border border-slate-200 bg-canvas p-4 flex items-start gap-3">
+              <div class="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-certi-navy">80% Mínimo</p>
+                <p class="text-xs text-slate-500 mt-0.5">Se aprueba con al menos 8 de 10 aciertos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de inicio -->
+        <form id="start-form" class="space-y-5" novalidate>
+          <div>
+            <label for="student-name-input" class="block text-sm font-semibold text-certi-navy mb-1.5">
+              Nombre completo del estudiante <span class="text-rose-600">*</span>
+            </label>
+            <input
+              type="text"
+              id="student-name-input"
+              name="studentName"
+              placeholder="Ej. Laura Camila Rodríguez"
+              autocomplete="name"
+              required
+              class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:border-certi-blue focus:ring-2 focus:ring-certi-blue/20 transition"
+            />
+            <p id="name-error" class="hidden mt-1.5 text-xs font-medium text-rose-600 flex items-center gap-1.5">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Por favor, ingresa tu nombre completo para iniciar la evaluación.
+            </p>
+          </div>
+
+          <div class="pt-1">
+            <button
+              type="submit"
+              id="start-btn"
+              class="w-full sm:w-auto sm:min-w-[240px] inline-flex items-center justify-center gap-2.5 bg-certi-blue hover:bg-certi-blueDark active:bg-certi-navy text-white font-semibold text-base px-7 py-3.5 rounded-xl shadow-sm transition cursor-pointer"
+            >
+              <span>Iniciar Evaluación</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- VISTA 2: PANTALLA DE EVALUACIÓN                                       -->
+  <!-- ===================================================================== -->
+  <section id="quiz-view" class="hidden flex-1 flex flex-col">
+
+    <!-- Barra superior fija -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 shadow-xs">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <!-- Nombre y progreso -->
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs font-bold uppercase tracking-wider text-white bg-certi-navy px-2.5 py-0.5 rounded-md">
+                ACPC · Módulo 2
+              </span>
+              <span id="header-student-name" class="text-sm font-semibold text-slate-700 truncate"></span>
+            </div>
+            <div class="mt-1 flex items-center gap-2 text-xs text-slate-500">
+              <span id="header-progress-text" class="font-semibold text-certi-navy">Pregunta 1 de 10</span>
+              <span>•</span>
+              <span id="header-answered-count">0 de 10 respondidas</span>
+            </div>
+          </div>
+
+          <!-- Temporizador obligatorio -->
+          <div
+            id="timer-badge"
+            class="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-certi-border bg-certi-soft text-certi-navy font-bold text-sm sm:text-base tabular-nums shrink-0 transition-colors"
+            aria-label="Tiempo restante"
+          >
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-certi-blue" id="timer-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span id="timer-display">15:00</span>
+          </div>
+        </div>
+
+        <!-- Barra de progreso visual -->
+        <div class="mt-3 w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div id="progress-bar" class="h-full bg-certi-blue rounded-full transition-all duration-300" style="width: 10%;"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Contenido principal de la evaluación -->
+    <div class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6">
+
+      <!-- Navegador interactivo de preguntas (1 al 10) -->
+      <nav aria-label="Navegador de preguntas" class="bg-white rounded-2xl border border-slate-200 p-4 shadow-2xs">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Navegador de preguntas</span>
+          <div class="flex items-center gap-3 text-xs text-slate-500">
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-certi-navy"></span> Actual
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-certi-blue"></span> Respondida
+            </span>
+            <span class="inline-flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-200 border border-slate-300"></span> Pendiente
+            </span>
+          </div>
+        </div>
+        <div id="question-navigator" class="grid grid-cols-5 sm:grid-cols-10 gap-2"></div>
+      </nav>
+
+      <!-- Tarjeta de pregunta actual -->
+      <article id="question-card" class="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 shadow-sm animate-fade-slide">
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span id="question-number-badge" class="inline-flex items-center text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-certi-soft text-certi-blue border border-certi-border">
+            Pregunta 1 de 10
+          </span>
+        </div>
+
+        <h2 id="question-text" class="text-lg sm:text-xl font-bold text-slate-900 leading-snug mb-6"></h2>
+
+        <!-- Opciones en tarjetas clicables -->
+        <div id="options-container" class="space-y-3" role="radiogroup" aria-labelledby="question-text"></div>
+      </article>
+
+      <!-- Controles de navegación inferiores -->
+      <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-1">
+        <button
+          type="button"
+          id="prev-btn"
+          class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Anterior
+        </button>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <button
+            type="button"
+            id="finish-btn"
+            class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-certi-blue text-certi-blue hover:bg-certi-soft font-semibold text-sm transition cursor-pointer"
+          >
+            Finalizar Evaluación
+          </button>
+
+          <button
+            type="button"
+            id="next-btn"
+            class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-certi-navy hover:bg-certi-navyLight text-white font-semibold text-sm shadow-sm transition cursor-pointer"
+          >
+            <span>Siguiente</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- VISTA 3: PANTALLA DE RESULTADOS Y REVISIÓN DETALLADA                  -->
+  <!-- ===================================================================== -->
+  <section id="results-view" class="hidden flex-1 py-6 sm:py-10 px-4 sm:px-6">
+    <div class="max-w-4xl mx-auto space-y-6 animate-fade-slide">
+
+      <!-- Encabezado exclusivo para impresión PDF -->
+      <div class="hidden print-only border-b-2 border-certi-navy pb-3 mb-4">
+        <p class="text-xs font-bold uppercase tracking-widest text-slate-500">Constancia de Evaluación · Certiprof® ACPC V072026</p>
+        <h1 class="text-xl font-extrabold text-certi-navy mt-1">Evaluación Módulo 2: Coaching, Facilitación y Enseñanza como Agile Coach</h1>
+      </div>
+
+      <!-- Tarjeta de Resumen Principal -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden print-card print-break-avoid">
+        <div class="print-results-header px-6 py-6 sm:px-8 sm:py-7 bg-certi-navy text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider text-certi-cyan">
+              Resultados de Evaluación · Módulo 2 ACPC
+            </p>
+            <h1 id="result-student-name" class="text-2xl sm:text-3xl font-extrabold mt-1"></h1>
+            <p id="result-datetime" class="text-xs sm:text-sm text-slate-300 mt-1"></p>
+          </div>
+
+          <!-- Sello de estado Aprobado / No Aprobado -->
+          <div id="result-status-seal" class="inline-flex flex-col items-center justify-center px-5 py-3 rounded-xl border-2 text-center shrink-0">
+            <span id="result-status-label" class="text-base sm:text-lg font-extrabold tracking-wide uppercase"></span>
+            <span id="result-status-sub" class="text-xs font-medium opacity-90 mt-0.5"></span>
+          </div>
+        </div>
+
+        <!-- Aviso si finalizó por tiempo agotado -->
+        <div id="timeout-notice" class="hidden bg-amber-50 border-b border-amber-200 px-6 py-3 text-xs sm:text-sm text-amber-800 font-medium flex items-center gap-2">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+          </svg>
+          <span>El tiempo límite de 15 minutos finalizó; la evaluación fue calificada automáticamente.</span>
+        </div>
+
+        <!-- Métricas numéricas -->
+        <div class="p-6 sm:p-8">
+          <div class="print-metrics-grid grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="rounded-xl bg-canvas border border-slate-200 p-4 text-center">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Puntaje</p>
+              <p id="metric-score" class="text-2xl sm:text-3xl font-extrabold text-certi-navy mt-1">0/10</p>
+            </div>
+            <div class="rounded-xl bg-canvas border border-slate-200 p-4 text-center">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Porcentaje</p>
+              <p id="metric-percent" class="text-2xl sm:text-3xl font-extrabold text-certi-navy mt-1">0%</p>
+            </div>
+            <div class="rounded-xl bg-canvas border border-slate-200 p-4 text-center">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Tiempo Utilizado</p>
+              <p id="metric-time" class="text-2xl sm:text-3xl font-extrabold text-certi-navy mt-1 tabular-nums">00:00</p>
+            </div>
+            <div class="rounded-xl bg-canvas border border-slate-200 p-4 text-center">
+              <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Mínimo ACPC</p>
+              <p class="text-2xl sm:text-3xl font-extrabold text-certi-blue mt-1">80%</p>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="no-print mt-6 pt-6 border-t border-slate-200 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              id="copy-summary-btn"
+              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-certi-blue hover:bg-certi-blueDark text-white font-semibold text-sm transition cursor-pointer"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              </svg>
+              Copiar resumen para el chat
+            </button>
+
+            <button
+              type="button"
+              id="print-btn"
+              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-certi-navy hover:bg-certi-navyLight text-white font-semibold text-sm transition cursor-pointer"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Imprimir / Guardar PDF
+            </button>
+
+            <button
+              type="button"
+              id="retry-btn"
+              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition cursor-pointer sm:ml-auto"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Reintentar evaluación
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revisión detallada pregunta por pregunta -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-bold text-certi-navy">Revisión Detallada por Pregunta</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Compara tus respuestas con la clave oficial y revisa la explicación pedagógica.</p>
+          </div>
+
+          <!-- Filtros -->
+          <div class="no-print inline-flex bg-white p-1 rounded-xl border border-slate-200 self-start sm:self-auto" role="group" aria-label="Filtrar preguntas">
+            <button type="button" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+              Todas
+            </button>
+            <button type="button" data-filter="correct" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+              Correctas
+            </button>
+            <button type="button" data-filter="incorrect" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer">
+              Incorrectas
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado vacío cuando el filtro no tiene elementos -->
+        <div id="filter-empty-state" class="no-print hidden bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 text-sm"></div>
+
+        <!-- Lista de tarjetas de revisión -->
+        <div id="review-list" class="space-y-4"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL DE CONFIRMACIÓN PARA FINALIZAR EVALUACIÓN                       -->
+  <!-- ===================================================================== -->
+  <div id="confirm-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-xl max-w-md w-full p-6 animate-fade-slide" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="flex items-start gap-3.5">
+        <div id="modal-icon-box" class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"></div>
+        <div class="flex-1">
+          <h3 id="modal-title" class="text-lg font-bold text-certi-navy"></h3>
+          <p id="modal-message" class="text-sm text-slate-600 mt-1.5 leading-relaxed"></p>
+          <div id="modal-unanswered-list" class="hidden mt-3 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs font-semibold text-amber-800"></div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col-reverse sm:flex-row justify-end gap-2.5">
+        <button
+          type="button"
+          id="modal-cancel-btn"
+          class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition cursor-pointer"
+        >
+          Volver y revisar
+        </button>
+        <button
+          type="button"
+          id="modal-confirm-btn"
+          class="px-5 py-2.5 rounded-xl bg-certi-blue hover:bg-certi-blueDark text-white font-semibold text-sm transition cursor-pointer"
+        >
+          Finalizar y Calificar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- TOAST DE NOTIFICACIÓN                                                 -->
+  <!-- ===================================================================== -->
+  <div
+    id="toast"
+    role="status"
+    aria-live="polite"
+    class="no-print fixed bottom-5 right-5 z-50 max-w-sm transform translate-y-20 opacity-0 pointer-events-none transition-all duration-300"
+  >
+    <div id="toast-inner" class="flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-sm font-medium text-white bg-certi-navy">
+      <span id="toast-icon" class="shrink-0 font-bold"></span>
+      <span id="toast-text"></span>
+    </div>
+  </div>
+
+  <!-- Pie de página -->
+  <footer class="no-print py-4 text-center text-xs text-slate-400">
+    Certiprof® Agile Coach Professional Certificate (ACPC) V072026 · Evaluación Módulo 2
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- LÓGICA DE LA APLICACIÓN                                               -->
+  <!-- ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // -----------------------------------------------------------------------
+      // 1. BANCO EXACTO DE LAS 10 PREGUNTAS OFICIALES (ORDEN FIJO)
+      // -----------------------------------------------------------------------
+      const OFFICIAL_QUESTIONS = [
+        {
+          id: 1,
+          ref: 'Oficial #7',
+          text: 'El Coaching Profesional se refiere a:',
+          options: [
+            'Capacidad para actuar como Coach, con base en los intereses de un cliente, ayudándole a determinar la dirección; en lugar de aconsejar u opinar con base en la experiencia y conocimiento sobre los procesos de coaching.',
+            'Proceso neutral que le permite a los individuos, equipos y organizaciones alcanzar objetivos y resultados de forma más eficiente y equilibrada en sus procesos de descubrimiento, adopción y adaptación, manteniendo su propósito y definición de éxito.',
+            'Capacidad para compartir e impartir la experiencia y conocimiento propio para ayudar a otros a desarrollarse en un dominio igual o similar.',
+            'Capacidad de transferir el conocimiento adecuado, en el momento correcto, de forma alineada, para que las personas, los equipos y las organizaciones aprendan y lo adopten de forma efectiva.'
+          ],
+          correctIndex: 0,
+          explanation: 'El Coaching Profesional se centra en asociarse con el cliente para que descubra su propia dirección mediante preguntas poderosas, sin aconsejar ni opinar desde la experiencia del coach.'
+        },
+        {
+          id: 2,
+          ref: 'Oficial #9',
+          text: 'La Capacidad de transferir el conocimiento adecuado, en el momento correcto, de forma alineada, para que las personas, los equipos y las organizaciones aprendan y lo adopten de forma efectiva.',
+          options: [
+            'Facilitación',
+            'Mentoring',
+            'Liderazgo Lean Agile',
+            'Enseñanza / Docencia'
+          ],
+          correctIndex: 3,
+          explanation: 'La competencia de Enseñanza (Teaching) consiste precisamente en transferir el conocimiento correcto en el momento oportuno para facilitar su adopción efectiva.'
+        },
+        {
+          id: 3,
+          ref: 'Oficial #10',
+          text: '¿Cuál de las siguientes se refiere a la capacidad de compartir e impartir la experiencia y conocimiento propio para ayudar a otros a desarrollarse en un dominio igual o similar?',
+          options: [
+            'Facilitación',
+            'Mentoring',
+            'Liderazgo Lean Agile',
+            'Enseñanza / Docencia'
+          ],
+          correctIndex: 1,
+          explanation: 'A diferencia del Coaching puro, el Mentoring sí implica compartir experiencia y conocimiento propio para guiar el crecimiento de otra persona en un dominio similar.'
+        },
+        {
+          id: 4,
+          ref: 'Oficial #29',
+          text: 'Nos permite mejorar la calidad de los procesos grupales, ahorro de tiempo en términos de eficiencia, así como la prevención y transformación de conflictos entre otros.',
+          options: [
+            'Agile Coaching.',
+            'Mentoring.',
+            'Facilitación.',
+            'Cualquiera de las anteriores.'
+          ],
+          correctIndex: 2,
+          explanation: 'Estos son los beneficios directos de la Facilitación: mejorar la calidad de los procesos grupales, ahorrar tiempo, equilibrar el poder y prevenir o transformar conflictos.'
+        },
+        {
+          id: 5,
+          ref: 'Oficial #30',
+          text: '¿Cuál de los siguientes no es un paso de la facilitación?',
+          options: [
+            'Definir el objetivo',
+            'Investigar previamente',
+            'Establecer reglas y pautas',
+            'Ajustar los resultados de la sesión'
+          ],
+          correctIndex: 3,
+          explanation: 'Los 7 pasos de la facilitación son: definir el objetivo, identificar participantes, investigar previamente, diseñar dinámicas, establecer reglas y pautas, ejecutar y ajustar (el proceso/dinámica), y cerrar. Un facilitador es neutral y nunca ajusta ni manipula los resultados del grupo.'
+        },
+        {
+          id: 6,
+          ref: 'Oficial #31',
+          text: 'Shu-Ha-Ri es un proceso mediante el cual podemos adoptar y madurar una práctica ágil hasta la transformación de ésta, de acuerdo a las necesidades y capacidades de nuestra propia organización.',
+          options: [
+            'Cierto.',
+            'Falso.'
+          ],
+          correctIndex: 0,
+          explanation: 'Cierto. Shu-Ha-Ri describe las etapas de madurez (Shu: seguir la regla, Ha: romper/adaptar la regla, Ri: ser la regla) para adoptar y evolucionar prácticas ágiles según el contexto del equipo u organización.'
+        },
+        {
+          id: 7,
+          ref: 'Oficial #32',
+          text: 'Se refiere al aprendizaje que se desarrolla en el lugar de trabajo para mejorar el rendimiento de los empleados.',
+          options: [
+            'Inducción.',
+            'Capacitación.',
+            'Entrenamiento.',
+            'Formación.'
+          ],
+          correctIndex: 2,
+          explanation: 'En las diferencias clave de los modelos educativos del material ACPC, el Entrenamiento profesional es el aprendizaje que ocurre directamente en el lugar de trabajo para mejorar el rendimiento.'
+        },
+        {
+          id: 8,
+          ref: 'Oficial #33',
+          text: 'Si una persona le solicita que le refuerce el conocimiento en el espacio de trabajo para recordarle cómo aplicar un determinado conocimiento, ¿qué tipo de entrenamiento estás dando?',
+          options: [
+            'Inducción.',
+            'Mentoring.',
+            'Entrenamiento de refuerzo.',
+            'En momentos clave.'
+          ],
+          correctIndex: 3,
+          explanation: 'Según el material oficial sobre cuándo enseñar en Agile, reforzar o transmitir una lección específica justo cuando surge la necesidad en el trabajo corresponde a enseñar "en momentos clave".'
+        },
+        {
+          id: 9,
+          ref: 'Oficial #16',
+          text: 'Si llevando un proceso de Agile Coaching, mientras estás dando una formación, alguien te dice que no estás haciendo coaching porque en este no se da formación esta persona está en:',
+          options: [
+            'Lo Cierto',
+            'Lo incorrecto'
+          ],
+          correctIndex: 0,
+          explanation: 'Está en lo cierto respecto al coaching puro (donde no se da formación). Sin embargo, dentro del marco integral del Agile Coaching, el Agile Coach sí cambia de postura y utiliza la formación como estrategia cuando el equipo lo necesita.'
+        },
+        {
+          id: 10,
+          ref: 'Oficial #26',
+          text: 'En Agile coaching no se puede utilizar el coaching profesional y el mentoring de forma conjunta ya que esto va contra los principios fundamentales del coaching.',
+          options: [
+            'Cierto.',
+            'Falso.'
+          ],
+          correctIndex: 1,
+          explanation: 'Falso. Un Agile Coach domina múltiples competencias (coaching profesional, mentoring, facilitación y enseñanza) y las combina estratégicamente según el nivel de madurez y la necesidad del equipo o persona.'
+        }
+      ];
+
+      const LETTERS = ['a', 'b', 'c', 'd'];
+      const PASSING_THRESHOLD = 80; // 80% = 8/10
+      const EXAM_DURATION_SECONDS = 15 * 60; // 15 minutos obligatorios
+
+      // -----------------------------------------------------------------------
+      // 2. ESTADO DE LA EVALUACIÓN
+      // -----------------------------------------------------------------------
+      const state = {
+        studentName: '',
+        answers: [],
+        currentIndex: 0,
+        remainingSeconds: EXAM_DURATION_SECONDS,
+        elapsedSeconds: 0,
+        timerInterval: null,
+        urgentWarningShown: false,
+        finishedByTimeout: false,
+        finishedAt: null,
+        activeFilter: 'all',
+        lastReport: null
+      };
+
+      // -----------------------------------------------------------------------
+      // 3. REFERENCIAS AL DOM
+      // -----------------------------------------------------------------------
+      const dom = {
+        welcomeView: document.getElementById('welcome-view'),
+        quizView: document.getElementById('quiz-view'),
+        resultsView: document.getElementById('results-view'),
+
+        startForm: document.getElementById('start-form'),
+        studentNameInput: document.getElementById('student-name-input'),
+        nameError: document.getElementById('name-error'),
+
+        headerStudentName: document.getElementById('header-student-name'),
+        headerProgressText: document.getElementById('header-progress-text'),
+        headerAnsweredCount: document.getElementById('header-answered-count'),
+        timerBadge: document.getElementById('timer-badge'),
+        timerIcon: document.getElementById('timer-icon'),
+        timerDisplay: document.getElementById('timer-display'),
+        progressBar: document.getElementById('progress-bar'),
+        questionNavigator: document.getElementById('question-navigator'),
+        questionCard: document.getElementById('question-card'),
+        questionNumberBadge: document.getElementById('question-number-badge'),
+        questionText: document.getElementById('question-text'),
+        optionsContainer: document.getElementById('options-container'),
+        prevBtn: document.getElementById('prev-btn'),
+        nextBtn: document.getElementById('next-btn'),
+        finishBtn: document.getElementById('finish-btn'),
+
+        resultStudentName: document.getElementById('result-student-name'),
+        resultDatetime: document.getElementById('result-datetime'),
+        resultStatusSeal: document.getElementById('result-status-seal'),
+        resultStatusLabel: document.getElementById('result-status-label'),
+        resultStatusSub: document.getElementById('result-status-sub'),
+        timeoutNotice: document.getElementById('timeout-notice'),
+        metricScore: document.getElementById('metric-score'),
+        metricPercent: document.getElementById('metric-percent'),
+        metricTime: document.getElementById('metric-time'),
+        reviewList: document.getElementById('review-list'),
+        filterEmptyState: document.getElementById('filter-empty-state'),
+        filterBtns: document.querySelectorAll('.filter-btn'),
+        copySummaryBtn: document.getElementById('copy-summary-btn'),
+        printBtn: document.getElementById('print-btn'),
+        retryBtn: document.getElementById('retry-btn'),
+
+        confirmModal: document.getElementById('confirm-modal'),
+        modalIconBox: document.getElementById('modal-icon-box'),
+        modalTitle: document.getElementById('modal-title'),
+        modalMessage: document.getElementById('modal-message'),
+        modalUnansweredList: document.getElementById('modal-unanswered-list'),
+        modalCancelBtn: document.getElementById('modal-cancel-btn'),
+        modalConfirmBtn: document.getElementById('modal-confirm-btn'),
+
+        toast: document.getElementById('toast'),
+        toastInner: document.getElementById('toast-inner'),
+        toastIcon: document.getElementById('toast-icon'),
+        toastText: document.getElementById('toast-text')
+      };
+
+      // -----------------------------------------------------------------------
+      // 4. UTILIDADES
+      // -----------------------------------------------------------------------
+
+      function formatTime(totalSeconds) {
+        const safe = Math.max(0, Math.floor(totalSeconds));
+        const mins = Math.floor(safe / 60);
+        const secs = safe % 60;
+        return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      }
+
+      function formatDateTime(date) {
+        try {
+          return new Intl.DateTimeFormat('es-CO', {
+            dateStyle: 'long',
+            timeStyle: 'short'
+          }).format(date);
+        } catch (err) {
+          return date.toLocaleString();
+        }
+      }
+
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      let toastTimeout = null;
+      function showToast(message, variant = 'navy') {
+        const styles = {
+          navy: { bg: 'bg-certi-navy', icon: '✓' },
+          blue: { bg: 'bg-certi-blue', icon: '✓' },
+          amber: { bg: 'bg-amber-600', icon: '!' },
+          rose: { bg: 'bg-rose-600', icon: '!' }
+        };
+        const chosen = styles[variant] || styles.navy;
+
+        dom.toastInner.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl shadow-lg text-sm font-medium text-white ${chosen.bg}`;
+        dom.toastIcon.textContent = chosen.icon;
+        dom.toastText.textContent = message;
+
+        dom.toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+        dom.toast.classList.add('translate-y-0', 'opacity-100');
+
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          dom.toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+          dom.toast.classList.remove('translate-y-0', 'opacity-100');
+        }, 3200);
+      }
+
+      function copyTextToClipboard(text) {
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.setAttribute('readonly', '');
+          textarea.style.position = 'fixed';
+          textarea.style.top = '-9999px';
+          textarea.style.left = '-9999px';
+          document.body.appendChild(textarea);
+          textarea.focus();
+          textarea.select();
+          const success = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          return success;
+        } catch (err) {
+          return false;
+        }
+      }
+
+      function showView(viewName) {
+        dom.welcomeView.classList.add('hidden');
+        dom.quizView.classList.add('hidden');
+        dom.resultsView.classList.add('hidden');
+
+        if (viewName === 'welcome') dom.welcomeView.classList.remove('hidden');
+        if (viewName === 'quiz') dom.quizView.classList.remove('hidden');
+        if (viewName === 'results') dom.resultsView.classList.remove('hidden');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // -----------------------------------------------------------------------
+      // 5. INICIO Y TEMPORIZADOR OBLIGATORIO (15:00)
+      // -----------------------------------------------------------------------
+
+      function startEvaluation() {
+        const rawName = dom.studentNameInput.value.trim();
+        if (!rawName) {
+          dom.nameError.classList.remove('hidden');
+          dom.studentNameInput.classList.add('border-rose-500', 'focus:border-rose-500', 'focus:ring-rose-500/20');
+          dom.studentNameInput.focus();
+          return;
+        }
+
+        dom.nameError.classList.add('hidden');
+        dom.studentNameInput.classList.remove('border-rose-500', 'focus:border-rose-500', 'focus:ring-rose-500/20');
+
+        state.studentName = rawName;
+        state.answers = new Array(OFFICIAL_QUESTIONS.length).fill(null);
+        state.currentIndex = 0;
+        state.remainingSeconds = EXAM_DURATION_SECONDS;
+        state.elapsedSeconds = 0;
+        state.urgentWarningShown = false;
+        state.finishedByTimeout = false;
+        state.finishedAt = null;
+        state.activeFilter = 'all';
+
+        dom.headerStudentName.textContent = state.studentName;
+
+        startMandatoryTimer();
+        renderQuizState();
+        showView('quiz');
+      }
+
+      function clearTimer() {
+        if (state.timerInterval) {
+          clearInterval(state.timerInterval);
+          state.timerInterval = null;
+        }
+      }
+
+      function startMandatoryTimer() {
+        clearTimer();
+
+        // Restablecer estilo normal del temporizador
+        dom.timerBadge.className =
+          'flex items-center gap-2 px-3.5 py-2 rounded-xl border border-certi-border bg-certi-soft text-certi-navy font-bold text-sm sm:text-base tabular-nums shrink-0 transition-colors';
+        dom.timerIcon.setAttribute('class', 'w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-certi-blue');
+        dom.timerDisplay.textContent = formatTime(state.remainingSeconds);
+
+        state.timerInterval = setInterval(() => {
+          state.elapsedSeconds += 1;
+          state.remainingSeconds -= 1;
+          dom.timerDisplay.textContent = formatTime(state.remainingSeconds);
+
+          // Alerta visual cuando falten menos de 2 minutos (120 segundos)
+          if (state.remainingSeconds <= 120 && state.remainingSeconds > 0) {
+            if (state.remainingSeconds <= 30) {
+              dom.timerBadge.className =
+                'flex items-center gap-2 px-3.5 py-2 rounded-xl border border-rose-300 bg-rose-50 text-rose-700 font-bold text-sm sm:text-base tabular-nums shrink-0 transition-colors timer-urgent';
+              dom.timerIcon.setAttribute('class', 'w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-rose-600');
+            } else {
+              dom.timerBadge.className =
+                'flex items-center gap-2 px-3.5 py-2 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 font-bold text-sm sm:text-base tabular-nums shrink-0 transition-colors timer-urgent';
+              dom.timerIcon.setAttribute('class', 'w-4 h-4 sm:w-5 sm:h-5 shrink-0 text-amber-600');
+            }
+
+            if (!state.urgentWarningShown) {
+              state.urgentWarningShown = true;
+              showToast('Atención: quedan menos de 2 minutos para finalizar.', 'amber');
+            }
+          }
+
+          // Calificación automática al llegar a 00:00
+          if (state.remainingSeconds <= 0) {
+            clearTimer();
+            closeConfirmModal();
+            state.finishedByTimeout = true;
+            finishAndGrade();
+          }
+        }, 1000);
+      }
+
+      // -----------------------------------------------------------------------
+      // 6. RENDERIZADO DE LA EVALUACIÓN
+      // -----------------------------------------------------------------------
+
+      function renderQuizState() {
+        const total = OFFICIAL_QUESTIONS.length;
+        const currentQ = OFFICIAL_QUESTIONS[state.currentIndex];
+        const answeredCount = state.answers.filter((ans) => ans !== null).length;
+
+        // Progreso superior
+        dom.headerProgressText.textContent = `Pregunta ${state.currentIndex + 1} de ${total}`;
+        dom.headerAnsweredCount.textContent = `${answeredCount} de ${total} respondidas`;
+        dom.progressBar.style.width = `${((state.currentIndex + 1) / total) * 100}%`;
+
+        // Navegador interactivo (1 al 10)
+        dom.questionNavigator.innerHTML = '';
+        OFFICIAL_QUESTIONS.forEach((q, idx) => {
+          const isCurrent = idx === state.currentIndex;
+          const isAnswered = state.answers[idx] !== null;
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(idx + 1);
+          btn.setAttribute('aria-label', `Ir a pregunta ${idx + 1}${isAnswered ? ' (respondida)' : ' (pendiente)'}`);
+
+          let classes = 'h-10 rounded-xl text-sm font-bold border transition flex items-center justify-center cursor-pointer ';
+          if (isCurrent) {
+            classes += 'bg-certi-navy text-white border-certi-navy ring-2 ring-certi-navy/25 shadow-xs';
+          } else if (isAnswered) {
+            classes += 'bg-certi-soft text-certi-blue border-certi-border hover:bg-certi-blue hover:text-white';
+          } else {
+            classes += 'bg-canvas text-slate-600 border-slate-200 hover:border-certi-blue/50 hover:text-certi-navy';
+          }
+
+          btn.className = classes;
+          btn.addEventListener('click', () => {
+            state.currentIndex = idx;
+            renderQuizState();
+          });
+          dom.questionNavigator.appendChild(btn);
+        });
+
+        // Animación suave de cambio de pregunta
+        dom.questionCard.classList.remove('animate-fade-slide');
+        void dom.questionCard.offsetWidth;
+        dom.questionCard.classList.add('animate-fade-slide');
+
+        // Contenido de la pregunta actual (sin bloques temáticos)
+        dom.questionNumberBadge.textContent = `Pregunta ${state.currentIndex + 1} de ${total}`;
+        dom.questionText.textContent = currentQ.text;
+
+        // Opciones clicables
+        dom.optionsContainer.innerHTML = '';
+        const selectedOptionIndex = state.answers[state.currentIndex];
+
+        currentQ.options.forEach((optText, optIdx) => {
+          const isSelected = selectedOptionIndex === optIdx;
+          const letter = LETTERS[optIdx];
+
+          const optBtn = document.createElement('button');
+          optBtn.type = 'button';
+          optBtn.setAttribute('role', 'radio');
+          optBtn.setAttribute('aria-checked', String(isSelected));
+
+          optBtn.className =
+            'w-full text-left rounded-xl border-2 p-4 transition flex items-start gap-3.5 cursor-pointer group ' +
+            (isSelected
+              ? 'border-certi-blue bg-certi-soft/75 shadow-2xs'
+              : 'border-slate-200 bg-white hover:border-certi-blue/40 hover:bg-slate-50/80');
+
+          const badgeClasses = isSelected
+            ? 'bg-certi-blue text-white border-certi-blue'
+            : 'bg-canvas text-slate-600 border-slate-300 group-hover:border-certi-blue/50 group-hover:text-certi-blue';
+
+          optBtn.innerHTML = `
+            <span class="w-8 h-8 rounded-lg border text-sm font-bold uppercase flex items-center justify-center shrink-0 mt-0.5 transition ${badgeClasses}">
+              ${letter}
+            </span>
+            <span class="flex-1 text-sm sm:text-base leading-relaxed ${isSelected ? 'text-certi-navy font-semibold' : 'text-slate-700'}">
+              ${escapeHtml(optText)}
+            </span>
+            <span class="shrink-0 mt-1 ${isSelected ? 'text-certi-blue' : 'text-transparent'}">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+            </span>
+          `;
+
+          optBtn.addEventListener('click', () => {
+            state.answers[state.currentIndex] = optIdx;
+            renderQuizState();
+          });
+
+          dom.optionsContainer.appendChild(optBtn);
+        });
+
+        // Controles Anterior / Siguiente / Finalizar
+        dom.prevBtn.disabled = state.currentIndex === 0;
+
+        if (state.currentIndex === total - 1) {
+          dom.nextBtn.classList.add('hidden');
+          dom.finishBtn.className =
+            'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-certi-blue hover:bg-certi-blueDark text-white font-semibold text-sm shadow-sm transition cursor-pointer';
+        } else {
+          dom.nextBtn.classList.remove('hidden');
+          dom.finishBtn.className =
+            'inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-certi-blue text-certi-blue hover:bg-certi-soft font-semibold text-sm transition cursor-pointer';
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 7. MODAL DE CONFIRMACIÓN
+      // -----------------------------------------------------------------------
+
+      function openConfirmModal() {
+        const unansweredNums = [];
+        state.answers.forEach((ans, idx) => {
+          if (ans === null) unansweredNums.push(idx + 1);
+        });
+
+        if (unansweredNums.length > 0) {
+          dom.modalIconBox.className = 'w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0';
+          dom.modalIconBox.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+            </svg>
+          `;
+          dom.modalTitle.textContent = 'Tienes preguntas sin responder';
+          dom.modalMessage.textContent =
+            unansweredNums.length === 1
+              ? 'Aún queda 1 pregunta pendiente. Las preguntas sin responder se calificarán como incorrectas.'
+              : `Aún quedan ${unansweredNums.length} preguntas pendientes. Las preguntas sin responder se calificarán como incorrectas.`;
+          dom.modalUnansweredList.textContent = `Pendientes: Pregunta${unansweredNums.length > 1 ? 's' : ''} #${unansweredNums.join(', #')}`;
+          dom.modalUnansweredList.classList.remove('hidden');
+        } else {
+          dom.modalIconBox.className = 'w-10 h-10 rounded-xl bg-certi-soft text-certi-blue flex items-center justify-center shrink-0';
+          dom.modalIconBox.innerHTML = `
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          `;
+          dom.modalTitle.textContent = '¿Finalizar y calificar evaluación?';
+          dom.modalMessage.textContent =
+            'Has respondido las 10 preguntas. Al confirmar, verás tu puntaje final, el estado de aprobación y la revisión detallada.';
+          dom.modalUnansweredList.classList.add('hidden');
+        }
+
+        dom.confirmModal.classList.remove('hidden');
+      }
+
+      function closeConfirmModal() {
+        dom.confirmModal.classList.add('hidden');
+      }
+
+      // -----------------------------------------------------------------------
+      // 8. CALIFICACIÓN Y RESULTADOS
+      // -----------------------------------------------------------------------
+
+      function finishAndGrade() {
+        clearTimer();
+        closeConfirmModal();
+        state.finishedAt = new Date();
+
+        const total = OFFICIAL_QUESTIONS.length;
+        let correctCount = 0;
+
+        const detailedItems = OFFICIAL_QUESTIONS.map((q, idx) => {
+          const userAns = state.answers[idx];
+          const isCorrect = userAns === q.correctIndex;
+          if (isCorrect) correctCount += 1;
+
+          return {
+            displayNumber: idx + 1,
+            question: q,
+            userAns,
+            isCorrect
+          };
+        });
+
+        const percentage = Math.round((correctCount / total) * 100);
+        const passed = percentage >= PASSING_THRESHOLD;
+        const formattedTime = formatTime(state.elapsedSeconds);
+        const formattedDate = formatDateTime(state.finishedAt);
+
+        state.lastReport = {
+          studentName: state.studentName,
+          correctCount,
+          total,
+          percentage,
+          passed,
+          formattedTime,
+          formattedDate,
+          detailedItems
+        };
+
+        renderResultsScreen(state.lastReport);
+        showView('results');
+      }
+
+      function renderResultsScreen(report) {
+        dom.resultStudentName.textContent = report.studentName;
+        dom.resultDatetime.textContent = `Presentada el ${report.formattedDate}`;
+
+        // Sello Aprobado / No Aprobado
+        if (report.passed) {
+          dom.resultStatusSeal.className =
+            'inline-flex flex-col items-center justify-center px-5 py-3 rounded-xl border-2 border-emerald-300 bg-emerald-600 text-white text-center shrink-0 shadow-sm';
+          dom.resultStatusLabel.textContent = 'APROBADO';
+          dom.resultStatusSub.textContent = '≥ 80% requerido ACPC';
+        } else {
+          dom.resultStatusSeal.className =
+            'inline-flex flex-col items-center justify-center px-5 py-3 rounded-xl border-2 border-rose-300 bg-rose-600 text-white text-center shrink-0 shadow-sm';
+          dom.resultStatusLabel.textContent = 'NO APROBADO';
+          dom.resultStatusSub.textContent = '< 80% requerido ACPC';
+        }
+
+        // Aviso de tiempo agotado
+        dom.timeoutNotice.classList.toggle('hidden', !state.finishedByTimeout);
+
+        // Métricas
+        dom.metricScore.textContent = `${report.correctCount}/${report.total}`;
+        dom.metricPercent.textContent = `${report.percentage}%`;
+        dom.metricPercent.className = `text-2xl sm:text-3xl font-extrabold mt-1 ${
+          report.passed ? 'text-emerald-600' : 'text-rose-600'
+        }`;
+        dom.metricTime.textContent = report.formattedTime;
+
+        // Contadores de filtros
+        const incorrectTotal = report.total - report.correctCount;
+        dom.filterBtns.forEach((btn) => {
+          const f = btn.dataset.filter;
+          if (f === 'all') btn.textContent = `Todas (${report.total})`;
+          if (f === 'correct') btn.textContent = `Correctas (${report.correctCount})`;
+          if (f === 'incorrect') btn.textContent = `Incorrectas (${incorrectTotal})`;
+        });
+
+        // Revisión pregunta por pregunta (sin etiquetas de bloques temáticos)
+        dom.reviewList.innerHTML = '';
+        report.detailedItems.forEach((item) => {
+          const { displayNumber, question, userAns, isCorrect } = item;
+          const isUnanswered = userAns === null;
+
+          const statusBadge = isCorrect
+            ? '<span class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">✓ Correcta</span>'
+            : isUnanswered
+            ? '<span class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-800 border border-amber-200">! Sin responder</span>'
+            : '<span class="inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 border border-rose-200">✕ Incorrecta</span>';
+
+          const optionsHtml = question.options
+            .map((optText, optIdx) => {
+              const letter = LETTERS[optIdx];
+              const isRightOpt = optIdx === question.correctIndex;
+              const isUserChoice = optIdx === userAns;
+
+              let rowClass = 'border-slate-200 bg-white text-slate-600';
+              let letterClass = 'bg-slate-100 text-slate-500 border-slate-200';
+              let tagHtml = '';
+
+              if (isRightOpt && isUserChoice) {
+                rowClass = 'border-emerald-400 bg-emerald-50/80 text-slate-900 font-medium';
+                letterClass = 'bg-emerald-600 text-white border-emerald-600';
+                tagHtml = '<span class="text-[11px] font-bold uppercase tracking-wide text-emerald-700 bg-white border border-emerald-200 px-2 py-0.5 rounded-md shrink-0">Tu respuesta · Correcta</span>';
+              } else if (isRightOpt) {
+                rowClass = 'border-emerald-300 bg-emerald-50/50 text-slate-900 font-medium';
+                letterClass = 'bg-emerald-600 text-white border-emerald-600';
+                tagHtml = '<span class="text-[11px] font-bold uppercase tracking-wide text-emerald-700 bg-white border border-emerald-200 px-2 py-0.5 rounded-md shrink-0">Respuesta correcta</span>';
+              } else if (isUserChoice) {
+                rowClass = 'border-rose-300 bg-rose-50/80 text-slate-900';
+                letterClass = 'bg-rose-600 text-white border-rose-600';
+                tagHtml = '<span class="text-[11px] font-bold uppercase tracking-wide text-rose-700 bg-white border border-rose-200 px-2 py-0.5 rounded-md shrink-0">Tu respuesta</span>';
+              }
+
+              return `
+                <div class="rounded-xl border p-3 flex flex-col sm:flex-row sm:items-start gap-2.5 ${rowClass}">
+                  <div class="flex items-start gap-2.5 flex-1">
+                    <span class="w-6 h-6 rounded-md border text-xs font-bold uppercase flex items-center justify-center shrink-0 mt-0.5 ${letterClass}">
+                      ${letter}
+                    </span>
+                    <span class="text-sm leading-relaxed">${escapeHtml(optText)}</span>
+                  </div>
+                  ${tagHtml}
+                </div>
+              `;
+            })
+            .join('');
+
+          const reviewCard = document.createElement('article');
+          reviewCard.className =
+            'review-item bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 shadow-2xs print-card print-break-avoid';
+          reviewCard.dataset.status = isCorrect ? 'correct' : 'incorrect';
+
+          reviewCard.innerHTML = `
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-certi-navy">Pregunta ${displayNumber}</span>
+                <span class="text-xs font-medium px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200">${escapeHtml(question.ref)}</span>
+              </div>
+              ${statusBadge}
+            </div>
+
+            <h3 class="text-base font-bold text-slate-900 leading-snug mb-4">${escapeHtml(question.text)}</h3>
+
+            <div class="space-y-2 mb-4">
+              ${optionsHtml}
+            </div>
+
+            <div class="rounded-xl bg-certi-soft/75 border border-certi-border border-l-4 border-l-certi-blue p-4">
+              <p class="text-xs font-bold uppercase tracking-wider text-certi-blue mb-1">
+                Explicación pedagógica
+              </p>
+              <p class="text-sm text-slate-700 leading-relaxed">
+                ${escapeHtml(question.explanation)}
+              </p>
+            </div>
+          `;
+
+          dom.reviewList.appendChild(reviewCard);
+        });
+
+        applyReviewFilter('all');
+      }
+
+      function applyReviewFilter(filterType) {
+        state.activeFilter = filterType;
+
+        dom.filterBtns.forEach((btn) => {
+          const isActive = btn.dataset.filter === filterType;
+          btn.className =
+            'filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ' +
+            (isActive
+              ? 'bg-certi-navy text-white shadow-2xs'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-certi-navy');
+        });
+
+        const cards = dom.reviewList.querySelectorAll('.review-item');
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const status = card.dataset.status;
+          const shouldShow = filterType === 'all' || status === filterType;
+          card.classList.toggle('hidden', !shouldShow);
+          if (shouldShow) visibleCount += 1;
+        });
+
+        if (visibleCount === 0) {
+          dom.filterEmptyState.classList.remove('hidden');
+          dom.filterEmptyState.textContent =
+            filterType === 'incorrect'
+              ? '¡Excelente trabajo! No tuviste ninguna respuesta incorrecta.'
+              : 'No hay respuestas correctas para mostrar en este intento.';
+        } else {
+          dom.filterEmptyState.classList.add('hidden');
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 9. EVENTOS
+      // -----------------------------------------------------------------------
+
+      dom.startForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        startEvaluation();
+      });
+
+      dom.studentNameInput.addEventListener('input', () => {
+        if (dom.studentNameInput.value.trim()) {
+          dom.nameError.classList.add('hidden');
+          dom.studentNameInput.classList.remove('border-rose-500', 'focus:border-rose-500', 'focus:ring-rose-500/20');
+        }
+      });
+
+      dom.prevBtn.addEventListener('click', () => {
+        if (state.currentIndex > 0) {
+          state.currentIndex -= 1;
+          renderQuizState();
+        }
+      });
+
+      dom.nextBtn.addEventListener('click', () => {
+        if (state.currentIndex < OFFICIAL_QUESTIONS.length - 1) {
+          state.currentIndex += 1;
+          renderQuizState();
+        }
+      });
+
+      dom.finishBtn.addEventListener('click', openConfirmModal);
+
+      dom.modalCancelBtn.addEventListener('click', closeConfirmModal);
+      dom.modalConfirmBtn.addEventListener('click', finishAndGrade);
+      dom.confirmModal.addEventListener('click', (e) => {
+        if (e.target === dom.confirmModal) closeConfirmModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !dom.confirmModal.classList.contains('hidden')) {
+          closeConfirmModal();
+        }
+      });
+
+      dom.filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => applyReviewFilter(btn.dataset.filter));
+      });
+
+      dom.printBtn.addEventListener('click', () => {
+        window.print();
+      });
+
+      dom.copySummaryBtn.addEventListener('click', () => {
+        if (!state.lastReport) return;
+        const r = state.lastReport;
+        const statusText = r.passed ? '✅ APROBADO' : '⚠️ NO APROBADO';
+        const summaryText =
+          `📋 Evaluación Módulo 2 ACPC (Certiprof V072026)\n` +
+          `👤 Estudiante: ${r.studentName}\n` +
+          `🎯 Puntaje: ${r.correctCount}/${r.total} (${r.percentage}%)\n` +
+          `⏱️ Tiempo: ${r.formattedTime}\n` +
+          `📌 Estado: ${statusText} (Mínimo 80%)`;
+
+        const copied = copyTextToClipboard(summaryText);
+        if (copied) {
+          showToast('Resumen copiado al portapapeles.', 'blue');
+        } else {
+          showToast('No fue posible copiar automáticamente.', 'amber');
+        }
+      });
+
+      dom.retryBtn.addEventListener('click', () => {
+        clearTimer();
+        dom.studentNameInput.value = state.studentName;
+        showView('welcome');
+      });
+    })();
+  </script>
+</body>
+</html>
